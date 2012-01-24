@@ -30,7 +30,7 @@
         #### dir, rc, root color
         cols=`tput colors`                              # in emacs shell-mode tput colors returns -1
         if [[ -n "$cols" && $cols -ge 8 ]];  then       #  if terminal supports colors
-                dir_color=${dir_color:-CYAN}
+                dir_color=${dir_color:-WHITE}
                 rc_color=${rc_color:-red}
                 user_id_color=${user_id_color:-blue}
                 root_id_color=${root_id_color:-magenta}
@@ -41,7 +41,7 @@
         unset cols
 
 	#### prompt character, for root/non-root
-	prompt_char=${prompt_char:-'>'}
+	prompt_char=${prompt_char:-'$'}
 	root_prompt_char=${root_prompt_char:-'>'}
 
         #### vcs colors
@@ -54,12 +54,12 @@
                    op_vcs_color=${op_vcs_color:-MAGENTA}
              detached_vcs_color=${detached_vcs_color:-RED}
 
-                  hex_vcs_color=${hex_vcs_color:-BLACK}         # gray
+             hex_vcs_color=${hex_vcs_color:-BLACK}         # gray
 
 
         max_file_list_length=${max_file_list_length:-100}
         short_hostname=${short_hostname:-off}
-        upcase_hostname=${upcase_hostname:-on}
+        upcase_hostname=${upcase_hostname:-off}
         count_only=${count_only:-off}
         rawhex_len=${rawhex_len:-5}
 
@@ -693,7 +693,7 @@ prompt_command_function() {
         # else eval cwd_cmd,  cwd should have path after exection
         eval "${cwd_cmd/\\/cwd=\\\\}"
 
-        PS1="$colors_reset$rc$head_local$color_who_where$dir_color$cwd$tail_local$dir_color \n$prompt_char $colors_reset"
+        PS1="$colors_reset$rc$head_local$dir_color$cwd$tail_local$dir_color \n$color_who_where$prompt_char $colors_reset"
 
         unset head_local tail_local pwd
  }
