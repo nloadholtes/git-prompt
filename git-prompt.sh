@@ -696,8 +696,13 @@ prompt_command_function() {
         # if cwd_cmd have back-slash, then assign it value to cwd
         # else eval cwd_cmd,  cwd should have path after exection
         eval "${cwd_cmd/\\/cwd=\\\\}"
+        if [ -n "$VIRTUAL_ENV" ]; then
+           virtual_env="($VIRTUAL_ENV)"
+        else
+           virtual_env=""
+        fi
 
-        PS1="$colors_reset$rc$head_local$dir_color$cwd$tail_local$dir_color \n$color_who_where$prompt_char $colors_reset"
+        PS1="$colors_reset$rc$head_local$dir_color$cwd$tail_local$dir_color \n$virtual_env$color_who_where$prompt_char $colors_reset"
 
         unset head_local tail_local pwd
  }
