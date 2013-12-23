@@ -525,11 +525,12 @@ parse_git_status() {
         fi
 
         #### branch
-        branch=${branch/master/M}
+        # branch=${branch/master/M}
 
-                        # another method of above:
-                        # branch=$(git symbolic-ref -q HEAD || { echo -n "detached:" ; git name-rev --name-only HEAD 2>/dev/null; } )
-                        # branch=${branch#refs/heads/}
+        # another method of above:
+        branch=$(git symbolic-ref -q HEAD || { echo -n "detached:" ; git name-rev --name-only HEAD 2>/dev/null; } )
+        branch=${branch#refs/heads/}
+        branch=${branch/master/M}
 
         ### compose vcs_info
 
