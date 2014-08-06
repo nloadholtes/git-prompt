@@ -698,7 +698,7 @@ prompt_command_function() {
         # else eval cwd_cmd,  cwd should have path after exection
         eval "${cwd_cmd/\\/cwd=\\\\}"
         if [ -n "$VIRTUAL_ENV" ]; then
-           virtual_env="($VIRTUAL_ENV)"
+           virtual_env="($(echo $VIRTUAL_ENV | cut -d"/" -f5))"
         else
            virtual_env=""
         fi
